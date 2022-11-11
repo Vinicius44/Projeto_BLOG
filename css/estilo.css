@@ -1,0 +1,48 @@
+*{
+	margin:  0;
+	padding:  0;
+	box-sizing: border-box;
+}
+
+
+html, body{
+	height:  100%;
+}
+
+.clear{
+	clear: both;
+}
+
+header{
+	background-color:  #a9d9db;
+	color: white;
+}
+
+.center{
+	max-width:  1280px;
+	margin: 0 auto;
+	padding: 10px;
+
+}
+
+footer{
+	color:  white;
+	background-color:#a9d9db;
+	padding: 0px 0;
+	text-align:  center;
+}
+
+
+.sidebar, .noticias-principais{
+	margin: 40px 0;
+}
+
+.sidebar{
+	float: left;
+	width:  20%;
+}
+
+.noticias-principais{
+	float:  left;
+	width: 80%;
+}
