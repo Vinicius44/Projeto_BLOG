@@ -10,7 +10,7 @@ $autoload = function($class){
 
 	spl_autoload_register($autoload);
 
-	define("INCLUDE_PATH", "http://localhost/Projetos_PHP/Projeto_01/");
+	define("INCLUDE_PATH", "http://localhost/Portf%c3%b3lio/Back-End/Projeto_Noticia/");
 
 
 

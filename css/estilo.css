@@ -2,11 +2,17 @@
 	margin:  0;
 	padding:  0;
 	box-sizing: border-box;
+	
 }
 
 
 html, body{
 	height:  100%;
+}
+
+.w100{
+	width: 100%;
+
 }
 
 .clear{
@@ -16,6 +22,7 @@ html, body{
 header{
 	background-color:  #a9d9db;
 	color: white;
+	font-family: 'Sono', sans-serif;
 }
 
 .center{
@@ -26,23 +33,144 @@ header{
 }
 
 footer{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
 	color:  white;
 	background-color:#a9d9db;
 	padding: 0px 0;
 	text-align:  center;
+	font-family: 'Sono', sans-serif;
 }
 
 
 .sidebar, .noticias-principais{
 	margin: 40px 0;
+	font-family: 'Sono', sans-serif;
 }
 
 .sidebar{
 	float: left;
 	width:  20%;
+	background-color: rgb(240,240,240);
+	margin-right: 100px;
+	border-radius: 5px;
+	padding: 10px;
 }
 
 .noticias-principais{
 	float:  left;
-	width: 80%;
+	width: 70%;
+	padding: 10px;
+}
+
+.sidebar h4{
+	margin-bottom: 10px;
+}
+
+.sidebar p{
+	margin-bottom: 5px;
+}
+
+.noticias-principais .base_noticia{
+	margin-bottom: 40px;
+}
+
+.noticias-principais h2{
+	margin-bottom: 40px;
+}
+
+.noticias-principais p{
+	text-align: justify;
+	margin-bottom: 15px;
+}
+
+.noticias-principais a{
+
+	text-decoration: none;
+	padding: 5px;
+	background-color:  #a9d9db;
+	color: white;
+}
+
+
+.center_menu{
+	width: 100%;
+	text-align: center;
+	margin: 70px auto;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.center_menu h2{
+	margin-bottom:  50px;
+}
+
+.center_menu a{
+	display: block;
+
+	text-decoration: none;
+	width: 300px;
+	background-color: #2fa3a8;
+	margin: 20px auto;
+	color:  white;
+	padding: 5px 0;
+}
+
+.container_Cadastrar_Categ{
+	font-family: 'Sono', sans-serif ;
+	margin-top: 30px;
+}
+
+
+.container_Cadastrar_Categ label{
+	display: block;
+	margin-bottom: 5px;
+}
+
+.container_Cadastrar_Categ input[type=text]{
+	display: block;
+
+	padding: 8px;
+}
+
+.container_Cadastrar_Categ input[type=submit]{
+	font-size: 15px;
+	width: 400px;
+	cursor: pointer;
+	padding: 8px;
+	margin-top: 10px;
+}
+
+.cadastrar_not{
+	margin-top: 30px;
+}
+
+.cadastrar_not div{
+	margin-bottom: 10px;
+	font-family: 'Sono', sans-serif  ;
+}
+
+.cadastrar_not div input,
+.cadastrar_not div select,
+.cadastrar_not div textarea{
+	padding: 8px;
+	margin-top: 5px;
+}
+
+.cadastrar_not div input[type="submit"]{
+	font-size: 15px;
+	width: 400px;
+	cursor: pointer;
+}
+
+@media screen and (max-width:  1020px){
+	.sidebar{
+		width: 100%;
+	}
+	.noticias-principais{
+		width: 100%;
+	}
+	footer{
+		position: unset;
+	}
 }
