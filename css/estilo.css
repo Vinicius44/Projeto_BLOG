@@ -107,7 +107,7 @@ footer{
 
 .center_menu a{
 	display: block;
-
+	border-radius: 10px;
 	text-decoration: none;
 	width: 300px;
 	background-color: #2fa3a8;
