@@ -1,54 +1,113 @@
+<?php 
+
+	
+
+		$url2 = explode("/", $_GET['url']);
+		if(!isset($url2[2])){
+
+		if($url2[1] == ""){
+
+		}else{
+
+		}
+
+	
+?>
+
+
 
 <div class="sidebar">
-	<h4>Noticias de:</h4>
-	<p>Geral</p>
-	<p>Esportes</p>
-	<p>Brasil</p>
-	<p>Ciencia</p>
+	<h4>Selecionar categorias:</h4>
+	
+	<form method="get">
+	<select>
+		<option value="" disabled selected="">Todas as noticias</option>
+
+		<?php  
+
+			$categorias = Painel::selectAll("tb_site.categorias");
+			
+			foreach ($categorias as $key => $value) {
+			
+			
+
+
+
+		?>
+
+
+		<option <?php if($value["slug"] == @$url2[1]) echo "selected"?>  value="<?php echo $value["slug"]?>"><?php echo $value["nome"] ?></option>
+
+
+
+		<?php 
+
+
+
+			}
+
+		?>
+
+	</select>
 
 </div><!--sidebar-->
 
 
 <div class="noticias-principais">
-	<h2>Notícias Principais</h2>
 
+	<?php
+		if($url2[1] == ""){
+			echo "<h2>Notícias Principais</h2>";
+			$noticias = Mysql::conectar()->prepare("SELECT * FROM `tb_site.noticias`");	
+			$noticias->execute();
+		}else{
+
+
+			$categoriaNome = Mysql::conectar()->prepare("SELECT * FROM `tb_site.categorias` WHERE slug = ?");
+			$categoriaNome->execute(array($url2[1]));
+			
+
+			if($categoriaNome->rowCount() == 1){
+				echo "<h2>Notícias de ".$url2[1]."</h2>";
+				$categoriaNome = $categoriaNome->fetch();
+				@define("ID", $categoriaNome["id"]);
+				$noticias = Mysql::conectar()->prepare("SELECT * FROM `tb_site.noticias` WHERE categoria_id = ?");	
+				$noticias->execute(array(ID));
+				
+				
+			}else{
+				echo "<h2>Notícias Principais</h2>";
+				
+			}
+			//$idCategoria = $categoriaNome["id"];
+			//print_r($categoriaNome["id"]);
+			
+			
+		}
+		
+
+
+
+
+		foreach ($noticias as $key => $value) {
+			$sql = Mysql::conectar()->prepare("SELECT `slug` FROM `tb_site.categorias` WHERE id = ?");
+			$sql->execute(array($value["categoria_id"]));
+			$categoriaNome = $sql->fetch()["slug"];
+?>		
 
 	<div class="base_noticia">
-		<h4 class="titulo">LOREM IPSUM</h4>
+			<h4 class="titulo"><?php echo $value["titulo"]; ?></h4>
 
-		<p class="texto">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<p class="texto"><?php echo substr(strip_tags($value["conteudo"]), 0, 400)."...";?></p>
 
-		<a href="">Ver mais</a>
+		<a href="<?php echo INCLUDE_PATH; ?>menu_principal/<?php echo $categoriaNome;?>/<?php echo $value["slug"]; ?>">Ver mais</a>
 	</div><!--base-noticia-->
 
-	<div class="base_noticia">
-		<h4 class="titulo">LOREM IPSUM</h4>
 
-		<p class="texto">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<a href="">Ver mais</a>
-	</div><!--base-noticia-->
+<?php  } ?>
 
-	<div class="base_noticia">
-		<h4 class="titulo">LOREM IPSUM</h4>
+	
 
-		<p class="texto">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum...</p>
-		<a href="">Ver mais</a>
-	</div><!--base-noticia-->
 
 	
 
@@ -59,3 +118,10 @@
 
 <div class="clear"></div>
 
+<?php 
+
+	}else{
+		include("noticia_single.php");
+	}
+
+?>

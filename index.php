@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo INCLUDE_PATH?>css/estilo.css">
 	<title>Projeto Noticia</title>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,10 +18,11 @@
 </head>
 <body>
 
+	<base base="<?php INCLUDE_PATH ?>"></base>
 
 	<?php
 
-		$url = isset($_GET["url"]) ? $_GET['url'] : "menu-principal";
+		$url = isset($_GET["url"]) ? $_GET["url"] : "inicio";
 
 	?>
 
@@ -36,16 +37,30 @@
 
 		<div class="center">
 			<?php
+				
+				if(file_exists("pages/".$url.".php")){
+					include("pages/".$url.".php");
+				}else if(file_exists("pages/painel/".$url.".php")){
+					include("pages/painel/".$url.".php");
 
-				if($url == "menu-principal"){
-					include("pages/menu-principal.php");
-				}else if($url == "menu_painel"){
-					include("pages/painel/menu_painel.php");
-				}else if($url == "cadastrar_categorias"){
-					include("pages/painel/cadastrar_categorias.php");
-				}else if($url == "cadastrar_noticias"){
-					include("pages/painel/cadastrar_noticias.php");
+				}else{
+
+					if($url != "cadastrar_categorias" && $url != "cadastrar_noticias" && $url != "menu_painel"){
+
+						$urlPar = explode("/", $url)[0];
+
+						if($urlPar != "menu_principal"){
+							include("pages/nãoExiste.php");
+						}else{
+							include("pages/menu-principal.php");
+						}
+
+
+					}
+
+					
 				}
+
 
 			?>
 
@@ -53,11 +68,41 @@
 		
 	</section>
 
-	<footer>
+	<!--<footer>
 		<div class="center">
 			<p>Todos os direitos reservados</p>
-		</div><!--center-->
-	</footer>
+		</div><!--center-
+	</footer>-->
+
+	<script type="text/javascript" src="<?php echo INCLUDE_PATH ?>js/jquery.js"></script>
+
+
+	<?php 
+
+		if(strstr($url[0], "menu_principal") !== false){
+		echo "<p>".strstr($url)."</p>";
+
+
+	?>
+
+	<script>
+		
+		$(function(){
+
+			alert("boa");
+			/*$("select").change(function(){
+				location.href = include_path+"menu_principal/".$(this).val;
+			})*/
+		})
+
+
+	</script>
+
+	<?php 
+
+		}
+
+	?>
 
 	<script src="https://cdn.tiny.cloud/1/ltn5cqnmnoy52w8zjqaaf49lyg1j27mu3x7b8ciupxsm2cxy/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 	<script>

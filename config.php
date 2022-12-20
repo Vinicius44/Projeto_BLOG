@@ -17,6 +17,8 @@ $autoload = function($class){
 	define("PASSWORD", "");
 	define("DATABASE" , "projeto_blog");
 
+	define("BASE_DIR", __DIR__);
+
 
 
 ?>

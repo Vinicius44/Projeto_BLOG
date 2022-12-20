@@ -28,11 +28,18 @@
 
 					if($verificar->rowCount() == 0){
 
+
+
+
 							$slug = Painel::generateSlug($_POST["categoria"]);
 							$arr = ["nome" => $_POST["categoria"], "slug" => $slug, "tabela" => "tb_site.categorias" ];
 							
-
+			
 							$sql = Painel::insert($arr);
+
+
+
+
 
 							if($sql == true){
 								echo "<br/>A categoria foi cadastrada.";

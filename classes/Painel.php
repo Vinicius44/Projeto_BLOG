@@ -42,9 +42,9 @@
 				$parametros[] = $value;
 
 			}
+		
 
 			$query.= ")";
-			
 			$sql = Mysql::conectar()->prepare($query);
 			$sql->execute($parametros);
 			
@@ -55,9 +55,9 @@
 
 		public static function selectAll($tabela, $start = null, $end = null){
 			if($start == null && $end == null){
-				$query = "SELECT * FROM $tabela";
+				$query = "SELECT * FROM `$tabela`";
 				$sql = Mysql::conectar()->prepare($query);
-				echo "executei";
+				
 			}else{
 				$sql = Mysql::conectar()->prepare("SELECT * FROM $tabela LIMIT $start, $end");
 			}
@@ -107,6 +107,8 @@
 			$parametros[] = $_POST["id"];
 
 
+
+
 			$sql = Mysql::conectar()->prepare($query);
 
 			
@@ -133,13 +135,26 @@
 			if($imagem["type"] == "image/jpeg" || $imagem["type"] == "image/png" || $imagem["type"] == "image/jpg"){
 
 
-				$tamanho= intval($imagem["size"] / 1024);
+				$tamanho = intval($imagem["size"] / 1024);
 
 				if($tamanho < 300){
 					return true;
 				}else{
 					return false;
 				}
+			}else{
+				return false;
+			}
+		}
+
+		public static function uploadFile($file){
+			$formatoArquivo = explode(".",$file["name"]);
+			$imagemNome = uniqid().".".$formatoArquivo[count($formatoArquivo) - 1];
+
+			
+			if(move_uploaded_file($file["tmp_name"], BASE_DIR."/uploads/".$imagemNome)){
+				return $imagemNome;
+
 			}else{
 				return false;
 			}

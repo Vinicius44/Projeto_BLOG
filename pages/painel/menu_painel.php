@@ -1,6 +1,6 @@
 <div class="center_menu">
 
-	<h2>Gestão de Noticias</h2>
+	<h2>Gestão de Notícias</h2>
 
 	<a href="<?php echo INCLUDE_PATH?>cadastrar_categorias">Cadastrar Categorias</a>
 	<a href="">Gerenciar Categorias</a>
