@@ -62,7 +62,7 @@
 				$sql = Mysql::conectar()->prepare("SELECT * FROM $tabela LIMIT $start, $end");
 			}
 
-			echo "executado";
+			
 
 
 			$sql->execute();

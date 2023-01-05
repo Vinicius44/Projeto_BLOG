@@ -1,8 +1,9 @@
 <?php 
 
 	
-
+		
 		$url2 = explode("/", $_GET['url']);
+		
 		if(!isset($url2[2])){
 
 		if($url2[1] == ""){
@@ -19,36 +20,45 @@
 <div class="sidebar">
 	<h4>Selecionar categorias:</h4>
 	
-	<form method="get">
-	<select>
-		<option value="" disabled selected="">Todas as noticias</option>
+	<form>
+		<select>
+			<option value="" disabled selected="">Todas as noticias</option>
 
-		<?php  
+			<?php  
 
-			$categorias = Painel::selectAll("tb_site.categorias");
-			
-			foreach ($categorias as $key => $value) {
-			
-			
-
-
-
-		?>
-
-
-		<option <?php if($value["slug"] == @$url2[1]) echo "selected"?>  value="<?php echo $value["slug"]?>"><?php echo $value["nome"] ?></option>
+				$categorias = Painel::selectAll("tb_site.categorias");
+				
+				foreach ($categorias as $key => $value) {
+				
+				
 
 
 
-		<?php 
+			?>
+
+
+			<option <?php if($value["slug"] == @$url2[1]) echo "selected"?>  value="<?php echo $value["slug"]?>"><?php echo $value["nome"] ?></option>
 
 
 
-			}
+			<?php 
 
-		?>
 
-	</select>
+
+				}
+
+			?>
+
+		</select>
+	</form>
+
+	<form>
+		<div class="pesquisa">
+			<label>Pesquisar noticia:</label>
+			<input type="text" name="pesquisar">
+			<input type="submit" name="acaoPesquisar">
+		</div>
+	</form>
 
 </div><!--sidebar-->
 

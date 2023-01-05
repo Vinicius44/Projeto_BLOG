@@ -18,7 +18,7 @@
 </head>
 <body>
 
-	<base base="<?php INCLUDE_PATH ?>"></base>
+	<base base="<?php echo INCLUDE_PATH ?>"></base>
 
 	<?php
 
@@ -75,12 +75,13 @@
 	</footer>-->
 
 	<script type="text/javascript" src="<?php echo INCLUDE_PATH ?>js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo INCLUDE_PATH?>js/base.js"></script>
 
 
 	<?php 
 
-		if(strstr($url[0], "menu_principal") !== false){
-		echo "<p>".strstr($url)."</p>";
+		if(is_array(@$url2) && strstr(@$url2[0], "menu_principal") !== false){
+		
 
 
 	?>
@@ -89,10 +90,12 @@
 		
 		$(function(){
 
-			alert("boa");
-			/*$("select").change(function(){
-				location.href = include_path+"menu_principal/".$(this).val;
-			})*/
+			
+			
+			$("select").change(function(){
+				location.href = include_path+"menu_principal/"+$(this).val();
+				
+			})
 		})
 
 
