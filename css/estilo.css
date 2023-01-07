@@ -116,17 +116,29 @@ footer{
 
 div.pesquisa {
 
-	margin-top: 10px;
+	margin-top: 30px;
 
 }
 
 .sidebar input[type="text"]{
-		width: 100%;
+	width: 100%;
 	border-radius: 3px;
 	height: 30px;
 	padding-left: 5px;
 	font-size: 16px;
 	border:  1px solid #ccc;
+	font-family: 'Sono', sans-serif;
+}
+
+.sidebar input[type="submit"]{
+	width: 100%;
+	margin-top: 5px;
+	border-radius: 3px;
+	height: 30px;
+	padding-left: 5px;
+	font-size: 16px;
+	border:  1px solid #ccc;
+	color:  rgb(100,100,100);
 	font-family: 'Sono', sans-serif;
 }
 

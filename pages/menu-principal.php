@@ -52,11 +52,18 @@
 		</select>
 	</form>
 
-	<form>
+	<form method="post">
 		<div class="pesquisa">
-			<label>Pesquisar noticia:</label>
+			<h4>Pesquisar noticia:</h4>
 			<input type="text" name="pesquisar">
-			<input type="submit" name="acaoPesquisar">
+			<input type="submit" name="acaoPesquisar" value="Pesquisar">
+
+			<?php   
+
+
+
+
+			?>
 		</div>
 	</form>
 
@@ -68,12 +75,17 @@
 	<?php
 		if($url2[1] == ""){
 			echo "<h2>Notícias Principais</h2>";
-			$noticias = Mysql::conectar()->prepare("SELECT * FROM `tb_site.noticias`");	
+			$query = "SELECT * FROM `tb_site.noticias`";
+			if(isset($_POST['acaoPesquisar'])){
+				$pesquisar = $_POST["pesquisar"];
+				$query.=" WHERE titulo LIKE '%$pesquisar%'";
+			}
+			$noticias = Mysql::conectar()->prepare($query);	
 			$noticias->execute();
 		}else{
 
-
-			$categoriaNome = Mysql::conectar()->prepare("SELECT * FROM `tb_site.categorias` WHERE slug = ?");
+			$query = "SELECT * FROM `tb_site.categorias` WHERE slug = ?";
+			$categoriaNome = Mysql::conectar()->prepare($query);
 			$categoriaNome->execute(array($url2[1]));
 			
 
@@ -81,6 +93,9 @@
 				echo "<h2>Notícias de ".$url2[1]."</h2>";
 				$categoriaNome = $categoriaNome->fetch();
 				@define("ID", $categoriaNome["id"]);
+
+
+
 				$noticias = Mysql::conectar()->prepare("SELECT * FROM `tb_site.noticias` WHERE categoria_id = ?");	
 				$noticias->execute(array(ID));
 				
@@ -91,6 +106,8 @@
 			}
 			//$idCategoria = $categoriaNome["id"];
 			//print_r($categoriaNome["id"]);
+
+
 			
 			
 		}
