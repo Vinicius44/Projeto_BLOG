@@ -31,7 +31,13 @@
 
 <div class="noticia-single">
 	<h1><?php echo $value["titulo"] ?></h1>
-	<p><?php  echo $value["conteudo"];?></p>
+	<article>
+		
+		<?php echo $value["conteudo"]; ?>
+
+
+
+	</article>
 
 
 

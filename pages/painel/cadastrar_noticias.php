@@ -38,13 +38,6 @@
 	</div><!--container_cad-->
 
 
-	
-
-	 <div class="container_cad">
-	 	<label>Imagem:</label>
-	 	<input class="w100" type="file" name="imagem">
-	 </div><!--container_cad-->
-
 
 	 <div class="container_cad">
 	 	
@@ -61,22 +54,20 @@
 	 		$categoria_id = $_POST['categoria_id'];
 	 		$titulo = $_POST["titulo"];
 	 		$conteudo = $_POST["conteudo"];
-	 		$imagem = $_FILES["imagem"];
+	 		
 	 	
 
 
 	 		if($conteudo == "" || $titulo == ""){
 	 			echo "Erro, todos os campos não foram preenchidos!";
-	 		}else if($imagem["tmp_name"] == ""){
-	 			echo "Erro, o arquivo não foi selecionado.";
+	 		
 	 		}else{
 
-	 			if(Painel::imagemValida($imagem)){
 	 				$sql = Mysql::conectar()->prepare("SELECT * FROM `tb_site.noticias` WHERE titulo = ? AND categoria_id = ?");
 	 				$sql->execute(array($titulo, $categoria_id));
 
 	 				if($sql->rowCount() == 0){
-	 					$imagemNome = Painel::uploadFile($imagem);
+	 					$imagemNome = "i.png";
 	 					$slug = Painel::generateSlug($titulo);
 
 	 					$arr = ["categoria_id" => $categoria_id, "titulo" => $titulo, "conteudo" => $conteudo, "imagem" => $imagemNome, "slug" => $slug, "tabela" => "tb_site.noticias"];
@@ -86,10 +77,8 @@
 	 					echo '<p style="font-family: sans-serif;">A noticia foi armazenada com sucesso!</p>';
 
 
-	 				}
-	 			}else{
-	 				echo "Imagem inválida.";
 	 			}
+	 		
 
 
 	 		}
